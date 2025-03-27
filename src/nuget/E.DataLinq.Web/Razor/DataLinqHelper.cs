@@ -424,7 +424,14 @@ public class DataLinqHelper : IDataLinqHelper
         foreach (string filterParameter in filterParameters.Keys)
         {
             var filterProperties = ToDictionary(filterParameters[filterParameter]);
-            sb.Append("<div class='datalinq-filter-field-wrapper'>");
+
+            sb.Append("<div class='datalinq-filter-field-wrapper'");
+            if (filterProperties != null && filterProperties.ContainsKey("hidden") && GetDefaultValueFromRecord(filterProperties, "hidden").Equals("true"))
+            {
+                sb.Append(" hidden");
+            }
+            sb.Append(">");
+
             sb.Append("<div class='datalinq-label'>" + GetDefaultValueFromRecord(filterProperties, "displayname", filterParameter) + "</div>");
 
             if (filterProperties != null && filterProperties.ContainsKey("source"))
