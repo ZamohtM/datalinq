@@ -8,6 +8,7 @@ using E.DataLinq.Web.Services.Abstraction;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Dynamic;
@@ -16,6 +17,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml.Linq;
 
 namespace E.DataLinq.Web.Razor;
 
@@ -398,7 +400,7 @@ public class DataLinqHelper : IDataLinqHelper
 
     public object FilterView(
         string label,
-        [HelpDescription("Hier wird anstelle von Strings ein Dictionary übergeben. Die Keys entsprechen den Parametern von oben. Die Values geben ein anonymes Objekt an, mit dem Beispielsweise die Anzeigenamen der Parameter bestimmt werden können oder auch, dass es ein Datumsfeld ist (siehe TextFor). Außerdem besteht die Möglichkeit source, valueField, nameField und prependEmpty anzugeben. Damit wird eine Auswahllist erzeugt. Die Möglichkeiten könne unter der Methode ComboFor() nachgelesen werden. ((filterParameters: new Dictionary&lt;string,object&gt;(){\n   {\"ort\", new { displayname=\"Ort/Gemeinde\" }},\n     {\"datum\", new { displayname=\"Datum\", dataType=DataType.Date }},\n   {\"str\", new { displayname=\"Strasse\", source=\"endpoint-id@query-id\", valueField=\"STR\", nameField=\"STR_LANGTEXT\", prependEmpty=true  }}<br/>}})) Um Auswahlmenüs (ComboBox) mit Mehrfach-Auswahl zu ermöglich, kann das Attribut ((multipe='multiple')) mitgegeben werden.")]
+        [HelpDescription("Hier wird anstelle von Strings ein Dictionary übergeben. Die Keys entsprechen den Parametern von oben. Die Values geben ein anonymes Objekt an, mit dem beispielsweise die Anzeigenamen der Parameter bestimmt werden können oder auch, dass es ein Datumsfeld ist (siehe TextFor). Außerdem besteht die Möglichkeit, source, valueField, nameField und prependEmpty anzugeben. Damit wird eine Auswahlliste erzeugt. Die Möglichkeiten können unter der Methode ComboFor() nachgelesen werden. ((filterParameters: new Dictionary&lt; string,object&gt;(){  {\"ort\", new { displayname=\"Ort/Gemeinde\" }},  {\"datum\", new { displayname=\"Datum\", dataType=DataType.Date }},  {\"str\", new { displayname=\"Strasse\", source=\"endpoint-id@query-id\", valueField=\"STR\", nameField=\"STR_LANGTEXT\", prependEmpty=true }}  }))  Um Auswahlmenüs(ComboBox) mit Mehrfach-Auswahl zu ermöglichen, kann das Attribut((multiple= 'multiple')) mitgegeben werden.Zusätzlich kann das Attribut((hidden='true')) gesetzt werden, um das zugehörige Eingabefeld als verstecktes `input[type =\"hidden\"]` zu erstellen, dessen Wert weiterhin in den Filter einfließt, aber nicht direkt vom Benutzer bearbeitet werden kann.")]
         Dictionary<string, object> filterParameters,
         object htmlAttributes = null,
         [HelpDescription("Boolscher Wert, der angibt, ob der Filter zu Beginn geöffnet (aufgeklappt) ist")]
