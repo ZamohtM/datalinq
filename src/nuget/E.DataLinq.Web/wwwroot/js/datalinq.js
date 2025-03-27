@@ -400,21 +400,46 @@ var dataLinq = new function () {
     var _isSelect2 = function (e) { return $(e).hasClass('select2-hidden-accessible'); };
     this.clearFilter = function (sender) {
         var $filterBody = $(sender).closest('.datalinq-refresh-filter-body');
-        $filterBody.find('.datalinq-filter-parameter').each(function (i, e) {
+        var $view = $filterBody.closest('.datalinq-include, .datalinq-include-click');
+
+        var currentFilter = $view.attr('data-filter') || ''; 
+        var hiddenFilters = [];
+
+        var filterObj = {};
+        currentFilter.split('&').forEach(function (pair) {
+            var parts = pair.split('=');
+            if (parts.length === 2) {
+                filterObj[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+            }
+        });
+
+        $filterBody.find('input[type="hidden"].datalinq-filter-parameter').each(function (i, e) {
+            var paramName = $(e).attr('name');
+            var paramValue = $(e).val() || ''; 
+            hiddenFilters.push(paramName + '=' + encodeURIComponent(paramValue));
+        });
+
+        $filterBody.find('input:not([type="hidden"]).datalinq-filter-parameter, select.datalinq-filter-parameter').each(function (i, e) {
             if (_isSelect2(e)) {
-                $(e).val('').trigger('change');  // wenn select2 => trigger change to clear the box
+                $(e).val('').trigger('change');
             } else {
                 $(e).val('');
             }
-            // Checkbox auch unchecken?
-            if ($(e).attr("type") === "checkbox")
-                $(e).prop("checked", false);
 
-            if ($(e).attr("multiple") === "multiple")
+            if ($(e).attr("type") === "checkbox") {
+                $(e).prop("checked", false);
+            }
+
+            if ($(e).attr("multiple") === "multiple") {
                 $(e).val([]).change();
+            }
         });
+
+        $view.attr('data-filter', hiddenFilters.join('&'));
+
         dataLinq.updateViewFilter(sender);
     };
+
 
     this.refresh = function (elem) {
         var $e = $(elem).closest('.datalinq-include, .datalinq-include-click').removeClass('datalinq-include-click-loaded');

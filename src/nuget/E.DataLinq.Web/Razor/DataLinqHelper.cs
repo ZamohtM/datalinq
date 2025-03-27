@@ -425,17 +425,14 @@ public class DataLinqHelper : IDataLinqHelper
         {
             var filterProperties = ToDictionary(filterParameters[filterParameter]);
 
-            sb.Append("<div class='datalinq-filter-field-wrapper'");
-            if (filterProperties != null && filterProperties.ContainsKey("hidden") && GetDefaultValueFromRecord(filterProperties, "hidden").Equals("true"))
-            {
-                sb.Append(" hidden");
-            }
-            sb.Append(">");
+            sb.Append("<div class='datalinq-filter-field-wrapper'>"); 
 
-            sb.Append("<div class='datalinq-label'>" + GetDefaultValueFromRecord(filterProperties, "displayname", filterParameter) + "</div>");
+            
 
             if (filterProperties != null && filterProperties.ContainsKey("source"))
             {
+                sb.Append("<div class='datalinq-label'>" + GetDefaultValueFromRecord(filterProperties, "displayname", filterParameter) + "</div>");
+
                 var source = GetDefaultValueFromRecord(filterProperties, "source").ToString();
                 var dependsOn = source.KeyParameters();
 
@@ -464,36 +461,44 @@ public class DataLinqHelper : IDataLinqHelper
                 if (filterProperties != null && filterProperties.ContainsKey("dataType"))
                 {
                     fieldType = (DataType)Enum.Parse(typeof(DataType), GetDefaultValueFromRecord(filterProperties, "dataType")?.ToString());
-                    // Nur wenn Checkbox ausgewählt ist, soll der FieldType geändert werden; da input type nicht "Date", etc. sein soll.
                     if (fieldType != DataType.Checkbox)
                     {
                         fieldType = DataType.Text;
                     }
                 }
 
-                sb.Append("<input");
-                AppendHtmlAttributes(sb, new
+                if (filterProperties != null && filterProperties.ContainsKey("hidden") && GetDefaultValueFromRecord(filterProperties, "hidden").Equals("true"))
                 {
-                    type = fieldType.ToString().ToLower(),
-                    name = filterParameter,
-                    onkeyup = "dataLinq.updateViewFilter(this)",
-                    onchange = "dataLinq.updateViewFilter(this)"
-                }, "datalinq-filter-parameter datalinq-input");
-
-                if (filterProperties != null)
-                {
-                    if (filterProperties.ContainsKey("dataType"))
-                    {
-                        sb.Append(" data-datatype='" + GetDefaultValueFromRecord(filterProperties, "dataType")?.ToString() + "'");
-                    }
-                    if (filterProperties.ContainsKey("dropProperty") && filterProperties.ContainsKey("dropQuery"))
-                    {
-                        sb.Append(" data-drop-property='" + GetDefaultValueFromRecord(filterProperties, "dropProperty")?.ToString() + "'");
-                        sb.Append(" data-drop-query='" + GetDefaultValueFromRecord(filterProperties, "dropQuery")?.ToString() + "'");
-                    }
+                    sb.Append($"<input type='hidden' name='{filterParameter}' class='datalinq-filter-parameter' value='{GetDefaultValueFromRecord(filterProperties, "defaultValue") ?? ""}' />");
                 }
+                else
+                {
+                    sb.Append("<div class='datalinq-label'>" + GetDefaultValueFromRecord(filterProperties, "displayname", filterParameter) + "</div>");
 
-                sb.Append("/>");
+                    sb.Append("<input");
+                    AppendHtmlAttributes(sb, new
+                    {
+                        type = fieldType.ToString().ToLower(),
+                        name = filterParameter,
+                        onkeyup = "dataLinq.updateViewFilter(this)",
+                        onchange = "dataLinq.updateViewFilter(this)"
+                    }, "datalinq-filter-parameter datalinq-input");
+
+                    if (filterProperties != null)
+                    {
+                        if (filterProperties.ContainsKey("dataType"))
+                        {
+                            sb.Append(" data-datatype='" + GetDefaultValueFromRecord(filterProperties, "dataType")?.ToString() + "'");
+                        }
+                        if (filterProperties.ContainsKey("dropProperty") && filterProperties.ContainsKey("dropQuery"))
+                        {
+                            sb.Append(" data-drop-property='" + GetDefaultValueFromRecord(filterProperties, "dropProperty")?.ToString() + "'");
+                            sb.Append(" data-drop-query='" + GetDefaultValueFromRecord(filterProperties, "dropQuery")?.ToString() + "'");
+                        }
+                    }
+
+                    sb.Append("/>");
+                }
             }
             sb.Append("</div>");
         }
