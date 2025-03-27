@@ -402,16 +402,7 @@ var dataLinq = new function () {
         var $filterBody = $(sender).closest('.datalinq-refresh-filter-body');
         var $view = $filterBody.closest('.datalinq-include, .datalinq-include-click');
 
-        var currentFilter = $view.attr('data-filter') || ''; 
         var hiddenFilters = [];
-
-        var filterObj = {};
-        currentFilter.split('&').forEach(function (pair) {
-            var parts = pair.split('=');
-            if (parts.length === 2) {
-                filterObj[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
-            }
-        });
 
         $filterBody.find('input[type="hidden"].datalinq-filter-parameter').each(function (i, e) {
             var paramName = $(e).attr('name');
