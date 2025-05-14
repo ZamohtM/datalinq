@@ -1,7 +1,6 @@
 {
   "DataLinq.Api": {
-    "StoragePath_": "/app/DataLinq/storage",
-    "StoragePath": "C:\\DataLinq\\Data\\datalinq-storage",
+    "StoragePath": "../../..",
     "Razor": {
       "Engine": "default" // default, legacy, core
     },
@@ -27,9 +26,9 @@
   },
   "DataLinq.CodeApi": {
     "ClientEndpoints_": [
-      "https://localhost"
+      "http://localhost"
     ],
-    "AccessTokenIssuer_": "https://localhost:6001",
+    "AccessTokenIssuer_": "",
     "Clients": [
       {
         "Id": "1",

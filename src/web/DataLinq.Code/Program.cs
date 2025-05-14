@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddJsonFile(Path.Combine("_config", "datalinq.code.json"), optional: false, reloadOnChange: false)
-    .AddJsonFile(Path.Combine("_config", $"datalinq.code.{builder.Environment.EnvironmentName.ToLower()}.json"), optional: true, reloadOnChange: false);
+    .AddJsonFile(Path.Combine("_config", $"datalinq.code.{builder.Environment.EnvironmentName.ToLower()}.json"), optional: true, reloadOnChange: false)
+    .AddEnvironmentVariables();
 
 builder.AddServiceDefaults();
 
