@@ -5,9 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>ea580b26-e452-436d-858f-1b6dba6f711c</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.4" />
   </ItemGroup>
 
@@ -17,7 +21,7 @@
     <ProjectReference Include="..\..\nuget\E.DataLinq.Engine.OracleClient\E.DataLinq.Engine.OracleClient.csproj" />
     <ProjectReference Include="..\..\nuget\E.DataLinq.Engine.Postgres\E.DataLinq.Engine.Postgres.csproj" />
     <ProjectReference Include="..\..\nuget\E.DataLinq.Engine.SQLite\E.DataLinq.Engine.SQLite.csproj" />
-    <ProjectReference Include="..\..\nuget\E.Datalinq.Web\E.DataLinq.Web.csproj" />
+    <ProjectReference Include="..\..\nuget\E.DataLinq.Web\E.DataLinq.Web.csproj" />
   </ItemGroup>
 
 </Project>

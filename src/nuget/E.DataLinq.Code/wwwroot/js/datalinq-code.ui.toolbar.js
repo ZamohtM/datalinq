@@ -84,7 +84,7 @@
             .addClass('datalinq-code-toolbutton colorscheme')
             .appendTo($parent);
 
-        $("<div><div class='text'>Datalinq Helper</div></div>")
+        $("<div><div class='text'>DataLinq Helper</div></div>")
             .data('event', 'toggle-help')
             .addClass('datalinq-code-toolbutton help')
             .appendTo($parent);

@@ -5,13 +5,13 @@ namespace E.DataLinq.Web.Extensions.DependencyInjection;
 
 static public class ApplicationBuilderExtensions
 {
-    public static IApplicationBuilder UseDatalinqTokenAuthorization(this IApplicationBuilder app)
+    public static IApplicationBuilder UseDataLinqTokenAuthorization(this IApplicationBuilder app)
     {
         app.UseMiddleware<DataLinqAccessTokenAuthenticationMiddleware>();
         return app;
     }
 
-    public static IApplicationBuilder AddDatalinqRouting(this IApplicationBuilder app)
+    public static IApplicationBuilder AddDataLinqRouting(this IApplicationBuilder app)
     {
         app.UseEndpoints(endPoints =>
         {

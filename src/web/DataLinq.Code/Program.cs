@@ -4,7 +4,9 @@ using E.DataLinq.Code.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile(Path.Combine("_config", "datalinq.code.json"), optional: false, reloadOnChange: false);
+builder.Configuration
+    .AddJsonFile(Path.Combine("_config", "datalinq.code.json"), optional: false, reloadOnChange: false)
+    .AddJsonFile(Path.Combine("_config", $"datalinq.code.{builder.Environment.EnvironmentName.ToLower()}.json"), optional: true, reloadOnChange: false);
 
 builder.AddServiceDefaults();
 
@@ -15,12 +17,12 @@ builder.AddServiceDefaults();
 builder.Services.AddDataLinqCodeService(
     config =>
     {
-        config.DatalinqInstances = builder
+        config.DataLinqInstances = builder
                 .Configuration.GetSection("DataLinq.Code:Instances")
                               .Get<DataLinqCodeOptions.DataLinqInstance[]>();
 
         /*
-        config.DatalinqInstances = new DataLinqCodeOptions.DataLinqInstance[]
+        config.DataLinqInstances = new DataLinqCodeOptions.DataLinqInstance[]
         {
             new DataLinqCodeOptions.DataLinqInstance()
             {
@@ -77,7 +79,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseDatalinqCodeAuthentication();
+app.UseDataLinqCodeAuthentication();
 
 app.MapControllerRoute(
         name: "default",

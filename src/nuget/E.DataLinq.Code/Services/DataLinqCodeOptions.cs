@@ -10,7 +10,7 @@ public class DataLinqCodeOptions
 {
     public string LoginRedirectUrl { get; set; }
 
-    public DataLinqInstance[] DatalinqInstances { get; set; }
+    public DataLinqInstance[] DataLinqInstances { get; set; }
 
     public string ProjectWebSite { get; set; } = "https://github.com/e-netze/datalinq";
 
@@ -45,9 +45,9 @@ public class DataLinqCodeOptions
                                           .IfNullOrEmpty(defaultApiUrl)
                                           .AppendLoginRedirectPath();
 
-        if (this.DatalinqInstances == null)
+        if (this.DataLinqInstances == null)
         {
-            this.DatalinqInstances = new DataLinqCodeOptions.DataLinqInstance[]
+            this.DataLinqInstances = new DataLinqCodeOptions.DataLinqInstance[]
             {
                 new DataLinqCodeOptions.DataLinqInstance()
                 {
@@ -63,7 +63,7 @@ public class DataLinqCodeOptions
         {
             int index = 0;
 
-            foreach (var instance in this.DatalinqInstances)
+            foreach (var instance in this.DataLinqInstances)
             {
                 instance.LoginUrl = String.Format(instance.LoginUrl
                                                           .Replace("~", defaultApiUrl)

@@ -271,7 +271,7 @@ public class ClassHelp
 
         //if (type == typeof(RawString))
         //    return "RawString";
-        if (type == typeof(object))  // eigentlich ist RawString jetzt "object" -> Die Methode wird meiner Meinung nur in der Datalinq Hilfe verwendet um den Methodenheader zu erstellen...
+        if (type == typeof(object))  // eigentlich ist RawString jetzt "object" -> Die Methode wird meiner Meinung nur in der DataLinq Hilfe verwendet um den Methodenheader zu erstellen...
         {
             return "object";
         }

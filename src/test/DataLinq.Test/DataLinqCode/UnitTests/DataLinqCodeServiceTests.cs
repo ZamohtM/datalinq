@@ -45,7 +45,7 @@ public class DataLinqCodeServiceTests
         _optionsMock = new Mock<IOptions<DataLinqCodeOptions>>();
         var options = new DataLinqCodeOptions
         {
-            DatalinqInstances = new[]
+            DataLinqInstances = new[]
             {
             new DataLinqCodeOptions.DataLinqInstance
             {
@@ -77,19 +77,19 @@ public class DataLinqCodeServiceTests
     }
 
     [TestMethod]
-    public void Constructor_ShouldInitializeDatalinqInstances_WhenInstancesAreNull()
+    public void Constructor_ShouldInitializeDataLinqInstances_WhenInstancesAreNull()
     {
         var options = new DataLinqCodeOptions
         {
-            DatalinqInstances = null
+            DataLinqInstances = null
         };
         _optionsMock!.Setup(o => o.Value).Returns(options);
 
         var service = new DataLinqCodeService(new Mock<IHostUrlHelper>().Object, _cryptoMock!.Object, _identityServiceMock, _optionsMock.Object);
 
-        Assert.IsNotNull(options.DatalinqInstances);
-        Assert.AreEqual(1, options.DatalinqInstances.Length);
-        Assert.AreEqual("Local", options.DatalinqInstances[0].Name);
+        Assert.IsNotNull(options.DataLinqInstances);
+        Assert.AreEqual(1, options.DataLinqInstances.Length);
+        Assert.AreEqual("Local", options.DataLinqInstances[0].Name);
     }
 
     [TestMethod]
@@ -97,14 +97,14 @@ public class DataLinqCodeServiceTests
     {
         var options = new DataLinqCodeOptions
         {
-            DatalinqInstances = null
+            DataLinqInstances = null
         };
         _optionsMock!.Setup(o => o.Value).Returns(options);
 
         var service = new DataLinqCodeService(new Mock<IHostUrlHelper>().Object, _cryptoMock!.Object, _identityServiceMock, _optionsMock.Object);
 
-        var instance = _optionsMock.Object.Value.DatalinqInstances[0];
-        Assert.AreEqual("/DataLinqAuth?redirect=/DataLinqCode/Connect/", options.DatalinqInstances![0].LoginUrl);
-        Assert.AreEqual("/DataLinqAuth/Logout?redirect={0}", options.DatalinqInstances[0].LogoutUrl);
+        var instance = _optionsMock.Object.Value.DataLinqInstances[0];
+        Assert.AreEqual("/DataLinqAuth?redirect=/DataLinqCode/Connect/", options.DataLinqInstances![0].LoginUrl);
+        Assert.AreEqual("/DataLinqAuth/Logout?redirect={0}", options.DataLinqInstances[0].LogoutUrl);
     }
 }

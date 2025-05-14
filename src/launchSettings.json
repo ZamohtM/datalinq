@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "datalinq.code": "StartDebugging",
+        "datalinq.api": "StartDebugging"
+      }
+    }
+  }
+}

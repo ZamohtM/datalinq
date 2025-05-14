@@ -417,7 +417,7 @@ public class FrontendTests : PageTest
 
         await page.Locator(".datalinq-code-modal-close").ClickAsync();
 
-        await page.Locator("div").Filter(new() { HasText = "Datalinq Helper" }).Nth(3).ClickAsync();
+        await page.Locator("div").Filter(new() { HasText = "DataLinq Helper" }).Nth(3).ClickAsync();
 
         await Expect(page.Locator("#help-frame").ContentFrame.GetByRole(AriaRole.Heading, new() { Name = "DataLinq", Exact = true })).ToBeVisibleAsync();
 

@@ -8,9 +8,12 @@ using E.DataLinq.Web.Services.Abstraction;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddJsonFile(Path.Combine("_config", "datalinq.api.json"), optional: false, reloadOnChange: false);
+builder.Configuration
+    .AddJsonFile(Path.Combine("_config", "datalinq.api.json"), optional: false, reloadOnChange: false)
+    .AddJsonFile(Path.Combine("_config", $"datalinq.api.{builder.Environment.EnvironmentName.ToLower()}.json"), optional: true, reloadOnChange: false);
 
 builder.AddServiceDefaults();
+
 builder.Services.AddControllersWithViews();
 
 #region E.DataLinq.Web Services
@@ -48,7 +51,7 @@ builder.Services.AddDataLinqServices<FileSystemPersistanceService, CryptoService
     }
 );
 
-builder.Services.AddDefaultDatalinqEngines(builder.Configuration.GetSection("DataLinq.Api:SelectEngines"));
+builder.Services.AddDefaultDataLinqEngines(builder.Configuration.GetSection("DataLinq.Api:SelectEngines"));
 builder.Services.AddDataLinqDbFactoryProvider<E.DataLinq.Engine.Postgres.DbFactoryProvider>();
 builder.Services.AddDataLinqDbFactoryProvider<E.DataLinq.Engine.MsSqlServer.MsSqlClientDbFactoryProvider>();
 builder.Services.AddDataLinqDbFactoryProvider<E.DataLinq.Engine.SQLite.DbFactoryProvider>();
@@ -78,7 +81,6 @@ var app = builder.Build();
 app.MapDefaultEndpoints();
 
 
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -92,7 +94,7 @@ app.UseAntiforgery();
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseDatalinqTokenAuthorization();
+app.UseDataLinqTokenAuthorization();
 
 app.MapStaticAssets();
 

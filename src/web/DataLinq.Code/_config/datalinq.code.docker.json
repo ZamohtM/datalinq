@@ -1,0 +1,18 @@
+{
+  "DataLinq.Code": {
+    "Crypto": { // optional
+      // change me, if you use this properties!
+      "DefaultPasswort____": "g4vGGp{W26BS#@%zpNG5Rg!eeRp)XW@%",
+      "SaltBytes____": "5CPAOaj8UnLd7GsQnZpC8w=="
+    },
+    "Instances": [ // is set in apire program.cs
+      {
+        "Name": "Docker",
+        "Description": "A docker datalinq instance for testing and development",
+        "LoginUrl": "https://localhost:6001",
+        "LogoutUrl": "https://localhost:6001",
+        "CodeApiClientUrl": "https://datalinq.api:6001"
+      }
+    ]
+  }
+}

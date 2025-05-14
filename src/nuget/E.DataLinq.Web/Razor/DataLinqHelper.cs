@@ -26,25 +26,25 @@ Die Methoden dieser Klasse ermöglichen dynamische Inhalte innerhalb einer DataL
 public class DataLinqHelper : IDataLinqHelper
 {
     private readonly HttpContext _httpContext;
-    private readonly DataLinqService _currentDatalinqService;
+    private readonly DataLinqService _currentDataLinqService;
     private readonly IDataLinqUser _ui;
     private readonly IRazorCompileEngineService _razor;
 
     public DataLinqHelper(
         HttpContext httpContext,
-        DataLinqService currentDatalinqService,
+        DataLinqService currentDataLinqService,
         IRazorCompileEngineService razorService,
         IDataLinqUser ui)
     {
         _httpContext = httpContext;
-        _currentDatalinqService = currentDatalinqService;
+        _currentDataLinqService = currentDataLinqService;
         _ui = ui;
         _razor = razorService;
     }
 
     #region Load/Fetch Data
 
-    [HelpDescription("Die Methode holt Daten aus einer Datalinq Query ab und übergibt das Ergebnis an eine Javascript Funktion.")]
+    [HelpDescription("Die Methode holt Daten aus einer DataLinq Query ab und übergibt das Ergebnis an eine Javascript Funktion.")]
     public object JsFetchData(
             [HelpDescription("Gibt die Id der Query in folgender Form an: endpoint-id@query-id")]
             string id,
@@ -139,7 +139,7 @@ public class DataLinqHelper : IDataLinqHelper
             arguments["_orderby"] = orderby;
         }
 
-        var result = await _currentDatalinqService.QueryAsync(_httpContext, id, arguments, isDomainQuery: false);
+        var result = await _currentDataLinqService.QueryAsync(_httpContext, id, arguments, isDomainQuery: false);
 
         if (result.succeeded && result.result is IDictionary<string, object>[])
         {
@@ -1122,7 +1122,7 @@ public class DataLinqHelper : IDataLinqHelper
 
     [HelpDescription(@"Gruppiert Datensätze nach Zeitintervallen gibt dazugehörige Gruppengröße (d.h. Anzahl der Datensätze in der Gruppe) in einer JavaScript Variable im JSON-Format aus. Zusätzlich kann nach einem weiteren Feld gruppiert werden.")]
     public object StatisticsGroupByTime(
-        [HelpDescription("Datalinq-Datensätze, die gezählt werden sollen. Diese könnten auch durch eine C#-LINQ-Bedingung eingeschränkt sein.")]
+        [HelpDescription("DataLinq-Datensätze, die gezählt werden sollen. Diese könnten auch durch eine C#-LINQ-Bedingung eingeschränkt sein.")]
         IDictionary<string, object>[] records,
         [HelpDescription(@"Name des auszugebenden Javascript-Objektes")]
         string jsVariableName,

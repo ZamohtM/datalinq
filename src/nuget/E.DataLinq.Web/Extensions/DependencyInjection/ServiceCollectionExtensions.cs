@@ -56,7 +56,7 @@ static public class ServiceCollectionExtensions
                        .AddTransient<IPersistanceProviderService, TPersistProvider>()
                        .AddTransient<ICryptoService, TCryptoService>()
                        .AddTransient<AccessTokenService>()
-                       // DatalinqService muss Transient sein!!
+                       // DataLinqService muss Transient sein!!
                        // IEnumerable<IDataLinqEngine> wird injectet
                        // da diese Transient sind muss auch DataLinqServer Transient sein
                        // Sonst kommt es zu Fehler (IFeatureCollection has been disposed), weil IHttpContextAccessor sonst auch Singleton wird!!!
@@ -65,7 +65,7 @@ static public class ServiceCollectionExtensions
                        .AddTransient<AccessControlService>()
                        .AddTransient<IDataLinqEnvironmentService, DataLinqEnvironmentService>()
                        .AddTransient<IRazorCompileEngineService, RazorEngineService>()  // classic version
-                       .AddTransient<IRazorCompileEngineService, RazorEngineLanguageEngineRazorService>()  // Datalinq version
+                       .AddTransient<IRazorCompileEngineService, RazorEngineLanguageEngineRazorService>()  // DataLinq version
                        .AddTransient<IWorkerService, DeleteRazorEngineTempFilesWorkerService>()
                        .AddTransient<IWorkerService, DeleteDataLinqRazorEngineTempFilesWorkerService>()
                        .AddTransient<DataLinqInfoService>()
@@ -97,7 +97,7 @@ static public class ServiceCollectionExtensions
     }
 
 
-    static public IServiceCollection AddDefaultDatalinqEngines(
+    static public IServiceCollection AddDefaultDataLinqEngines(
                 this IServiceCollection services,
                 IConfigurationSection? enginesConfigSection
         )

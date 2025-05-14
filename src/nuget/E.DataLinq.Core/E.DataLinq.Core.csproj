@@ -6,6 +6,7 @@
     <FileVersion>
     </FileVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Configurations>Debug;Release;Docker</Configurations>
   </PropertyGroup>
 
 	<PropertyGroup>

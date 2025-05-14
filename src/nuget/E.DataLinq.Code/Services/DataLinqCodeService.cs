@@ -39,9 +39,9 @@ public class DataLinqCodeService
         var cookieData = identity.IdentityData();
 
         if (cookieData.id.HasValue &&
-            cookieData.id.Value < _options.DatalinqInstances.Count())
+            cookieData.id.Value < _options.DataLinqInstances.Count())
         {
-            var dataLinqInstance = _options.DatalinqInstances[cookieData.id.Value];
+            var dataLinqInstance = _options.DataLinqInstances[cookieData.id.Value];
 
             _client = new CodeApiClient(dataLinqInstance.CodeApiClientUrl, cookieData.accessToken);
 
@@ -80,7 +80,7 @@ public class DataLinqCodeService
 
     public string InstanceName => _instanceName;
 
-    public IEnumerable<DataLinqCodeOptions.DataLinqInstance> Instances => _options.DatalinqInstances.ToArray();
+    public IEnumerable<DataLinqCodeOptions.DataLinqInstance> Instances => _options.DataLinqInstances.ToArray();
 
     public string AccessToken => _accessToken;
 

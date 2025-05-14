@@ -69,7 +69,7 @@
     <Folder Include="wwwroot\lib\flatpickr\plugins\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\E.Datalinq.Core\E.DataLinq.Core.csproj" />
+    <ProjectReference Include="..\E.DataLinq.Core\E.DataLinq.Core.csproj" />
     <ProjectReference Include="..\E.DataLinq.LanguageEngine.Razor\E.DataLinq.LanguageEngine.Razor.csproj" />
   </ItemGroup>
 </Project>

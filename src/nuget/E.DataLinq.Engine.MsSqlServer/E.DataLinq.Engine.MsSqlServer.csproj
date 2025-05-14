@@ -3,6 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Configurations>Debug;Release;Docker</Configurations>
   </PropertyGroup>
 	
   <PropertyGroup>
@@ -23,6 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\E.Datalinq.Core\E.DataLinq.Core.csproj" />
+    <ProjectReference Include="..\E.DataLinq.Core\E.DataLinq.Core.csproj" />
   </ItemGroup>
 </Project>
