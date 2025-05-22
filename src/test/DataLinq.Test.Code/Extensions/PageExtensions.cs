@@ -1,13 +1,11 @@
 ﻿using Microsoft.Playwright;
 
-namespace E.DataLinq.Test.DataLinqCode.Extensions;
+namespace DataLinq.Test.Code.Extensions;
 
 public static class PageExtensions
 {
     public static async Task LogIntoDataLinq(this IPage page)
     {
-        await page.GetByText("Local A local datalinq").ClickAsync();
-
         var headingLocator = page.GetByRole(AriaRole.Heading);
 
         var headingText = await headingLocator.TextContentAsync();
@@ -16,9 +14,9 @@ public static class PageExtensions
 
         await page.Locator("html").ClickAsync();
 
-        await page.GetByPlaceholder("Enter username...").FillAsync("client2");
+        await page.GetByPlaceholder("Enter username...").FillAsync("datalinq");
 
-        await page.GetByPlaceholder("Enter password...").FillAsync("password");
+        await page.GetByPlaceholder("Enter password...").FillAsync("datalinq");
 
         await page.GetByRole(AriaRole.Button, new() { Name = "Login" }).ClickAsync();
     }

@@ -7,7 +7,7 @@ using Moq;
 using System.Security.Claims;
 using System.Security.Principal;
 
-namespace E.DataLinq.Test.DataLinqCode.UnitTests;
+namespace DataLinq.Test.Code.UnitTests;
 
 [TestClass]
 public class DataLinqCodeServiceTests

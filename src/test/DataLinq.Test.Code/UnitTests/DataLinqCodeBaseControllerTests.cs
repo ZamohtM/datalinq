@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Text;
 
-namespace E.DataLinq.Test.DataLinqCode.UnitTests;
+namespace DataLinq.Test.Code.UnitTests;
 
 [TestClass]
 public class DataLinqCodeBaseControllerTests
@@ -55,7 +55,7 @@ public class DataLinqCodeBaseControllerTests
         var result = controller.CallJsonObject(obj, pretty) as FileContentResult;
 
         Assert.IsNotNull(result);
-        var json = Encoding.UTF8.GetString((byte[])result.FileContents);
+        var json = Encoding.UTF8.GetString(result.FileContents);
         Assert.IsTrue(json.Contains("\"Name\": \"Test\""));
         Assert.IsTrue(json.Contains("\"Age\": 30"));
     }

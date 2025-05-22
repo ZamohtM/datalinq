@@ -8,7 +8,6 @@ using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System.Text;
 using System.Text.RegularExpressions;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace E.DataLinq.Test.DataLinqWeb.IntegrationTests;
 

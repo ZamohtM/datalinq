@@ -1,13 +1,13 @@
 ﻿using Aspire.Hosting;
 using Aspire.Hosting.ApplicationModel;
 using Aspire.Hosting.Testing;
-using E.DataLinq.Test.DataLinqCode.Extensions;
+using DataLinq.Test.Code.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Playwright;
 using Microsoft.Playwright.MSTest;
 using System.Text.RegularExpressions;
 
-namespace E.DataLinq.Test.DataLinqCode.PlaywrightTests;
+namespace DataLinq.Test.Code.PlaywrightTests;
 
 [TestClass]
 public class FrontendTests : PageTest
@@ -23,14 +23,14 @@ public class FrontendTests : PageTest
         AppHost = await appHostBuilder.BuildAsync();
         await AppHost.StartAsync();
 
-        var webResource = appHostBuilder.Resources.Where(r => r.Name == "datalinq").FirstOrDefault();
+        var webResource = appHostBuilder.Resources.Where(r => r.Name == "datalinq-code").FirstOrDefault();
 
         DataLinqEndpointUrl = webResource!.Annotations.OfType<EndpointAnnotation>().Where(x => x.Name == "https").FirstOrDefault()!.AllocatedEndpoint!.UriString;
 
         var resourceNotificationService = AppHost.Services.GetRequiredService<ResourceNotificationService>();
 
         await resourceNotificationService.WaitForResourceAsync(
-                "datalinq",
+                "datalinq-code",
                 KnownResourceStates.Running
             )
             .WaitAsync(TimeSpan.FromSeconds(30));
@@ -77,8 +77,6 @@ public class FrontendTests : PageTest
         var (page, browserContext) = await GetBrowserInstance();
 
         await page.GotoAsync(DataLinqEndpointUrl);
-
-        await page.GetByText("Local A local datalinq").ClickAsync();
 
         await page.GetByPlaceholder("Enter username...").ClickAsync();
 

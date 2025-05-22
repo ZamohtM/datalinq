@@ -16,15 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var instances = _dataLinqCode?.Instances;
-        var first = instances?.FirstOrDefault();
-
-        if (first != null)
-        {
-            return Redirect(first.LoginUrl);
-        }
-
-        return View(instances);
+        return View(_dataLinqCode?.Instances);
     }
 
 

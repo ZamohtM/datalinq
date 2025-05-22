@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using System.Security.Claims;
 
-namespace E.DataLinq.Test.DataLinqCode.UnitTests;
+namespace DataLinq.Test.Code.UnitTests;
 
 [TestClass]
 public class DataLinqCodeIdentityServiceTests

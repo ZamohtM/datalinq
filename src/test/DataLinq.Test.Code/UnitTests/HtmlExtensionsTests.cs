@@ -8,7 +8,7 @@ using Moq;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 
-namespace E.DataLinq.Test.DataLinqCode.UnitTests;
+namespace DataLinq.Test.Code.UnitTests;
 
 [TestClass]
 public class HtmlExtensionsTests
@@ -46,7 +46,7 @@ public class HtmlExtensionsTests
             { 2, "Two" }
         };
 
-        var result = HtmlExtensions.DictToSelectList<SelectItem>(dict).ToList();
+        var result = dict.DictToSelectList<SelectItem>().ToList();
 
         Assert.AreEqual(2, result.Count);
         Assert.AreEqual("One", result[0].Text);
@@ -79,7 +79,7 @@ public class HtmlExtensionsTests
             urlEncoderMock.Object,
             modelExpressionProviderMock.Object);
 
-        var result = HtmlExtensions.DescriptionFor(htmlHelper, expression) as HtmlString;
+        var result = htmlHelper.DescriptionFor(expression) as HtmlString;
 
         Assert.IsNotNull(result, "Expected HTML string, but result was null.");
         Assert.IsTrue(result.Value.Contains("description"), "HTML string does not contain 'description' element.");

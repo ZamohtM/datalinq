@@ -3,7 +3,7 @@ using E.DataLinq.Core.Services.Crypto;
 using E.DataLinq.Core.Services.Crypto.Abstraction;
 using Moq;
 
-namespace E.DataLinq.Test.DataLinqCode.UnitTests;
+namespace DataLinq.Test.Code.UnitTests;
 
 [TestClass]
 public class CryptoServiceExtensionsTests

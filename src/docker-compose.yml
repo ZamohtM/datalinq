@@ -1,41 +1,29 @@
 services:
   datalinq.code:
-    image: ${DOCKER_REGISTRY-}datalinqcode
-    build:
-      context: .
-      dockerfile: web/DataLinq.Code/Dockerfile
+    image: datalinq.code:latest
     ports:
       - "5001:5001"
     volumes:
       - ./https.pfx:/https/https.pfx
-      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
     environment:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/https.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=p455w0rd
       - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_HTTPS_PORTS=5001
       - DataLinq.Code__Instances__0__Name=DataLinq.CodeApi
-      - DataLinq.Code__Instances__0__Description=DataLinq.CodeApi instance for testing and development"
+      - DataLinq.Code__Instances__0__Description=DataLinq.CodeApi instance for testing and development
       - DataLinq.Code__Instances__0__LoginUrl=https://localhost:6001
       - DataLinq.Code__Instances__0__LogoutUrl=https://localhost:6001
       - DataLinq.Code__Instances__0__CodeApiClientUrl=https://datalinq.api:6001
 
   datalinq.api:
-    image: ${DOCKER_REGISTRY-}datalinqapi
-    build:
-      context: .
-      dockerfile: web/DataLinq.Api/Dockerfile
+    image: datalinq.api:latest
     ports:
       - "6000:6000"
       - "6001:6001"
     volumes:
-      - C:\DataLinq\Data\datalinq-storage:/app/DataLinq/storage
       - ./https.pfx:/https/https.pfx
-      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ./DataLinqStorage:/app/DataLinq/storage
     environment:
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/https.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=p455w0rd
