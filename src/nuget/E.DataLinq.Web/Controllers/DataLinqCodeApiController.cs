@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,7 @@ public class DataLinqCodeApiController : ApiBaseController
     private readonly DataLinqCodeIdentity _identity;
     private readonly DataLinqEndpointTypeService _endpointTypes;
     private readonly JsLibrariesService _jsLibraries;
+    private readonly IMonacoSnippetService _monacoSnippetService;
     private readonly IDataLinqApiNotificationService _notification;
 
     public DataLinqCodeApiController(ILogger<DataLinqCodeApiController> logger,
@@ -38,6 +40,7 @@ public class DataLinqCodeApiController : ApiBaseController
                                      DataLinqEndpointTypeService endpointTypes,
                                      IDataLinqCodeIdentityService _identitySerice,
                                      JsLibrariesService jsLibraries,
+                                     IMonacoSnippetService monacoSnippetService,
                                      IHostAuthenticationService hostAuthentication = null,
                                      IDataLinqApiNotificationService notification = null)
     {
@@ -47,6 +50,7 @@ public class DataLinqCodeApiController : ApiBaseController
         _endpointTypes = endpointTypes;
         _identity = _identitySerice.CurrentIdentity();
         _jsLibraries = jsLibraries;
+        _monacoSnippetService = monacoSnippetService;
         _hostAuthentication = hostAuthentication;
         _notification = notification;
     }
@@ -489,6 +493,14 @@ For more information, see Help (?).
     [HttpGet]
     [Route("capabilities/jslibs")]
     public IActionResult GetJsLibraries() => base.JsonObject(_jsLibraries.Libraries);
+
+    [HttpGet]
+    [Route("monacosnippit")]
+    public IActionResult GetSnippets()
+    {
+        string json = _monacoSnippetService.BuildSnippetJson();
+        return Content(json, "application/json");
+    }
 
     #endregion
 
